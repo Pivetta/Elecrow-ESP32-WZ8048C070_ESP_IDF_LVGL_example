@@ -2,6 +2,7 @@
 // UI for this project was created with SquareLine Studio.
 // It was tested with ESP-IDF v5.1
 
+#include "sdkconfig.h"
 #include "driver/gpio.h"
 #include "esp_err.h"
 #include "esp_lcd_panel_ops.h"
@@ -11,8 +12,9 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include "freertos/task.h"
+
 #include "lvgl.h"
-#include "sdkconfig.h"
+
 #include <stdio.h>
 
 #if CONFIG_EXAMPLE_LCD_TOUCH_ENABLED
@@ -20,11 +22,9 @@
 #include "esp_lcd_touch_gt911.h"
 #endif
 
-extern "C" {
+static const char *TAG = "MAIN";
 
-static const char *TAG = "Sunton_ESP32-8048S070c_example";
-
-// Proper settings for the Sunton devboard LCD
+// Proper settings for the Elecrow devboard LCD
 #define LCD_PIXEL_CLOCK_HZ (16 * 1000 * 1000)
 #define LCD_BK_LIGHT_ON_LEVEL 1
 #define LCD_BK_LIGHT_OFF_LEVEL !LCD_BK_LIGHT_ON_LEVEL
@@ -32,7 +32,7 @@ const gpio_num_t PIN_NUM_BK_LIGHT = GPIO_NUM_2;
 const gpio_num_t PIN_NUM_HSYNC = GPIO_NUM_39;
 const gpio_num_t PIN_NUM_VSYNC = GPIO_NUM_40;
 const gpio_num_t PIN_NUM_DE = GPIO_NUM_41;
-const gpio_num_t PIN_NUM_PCLK = GPIO_NUM_42;
+const gpio_num_t PIN_NUM_PCLK = GPIO_NUM_0;
 const gpio_num_t PIN_NUM_DATA0 = GPIO_NUM_15;  // B0
 const gpio_num_t PIN_NUM_DATA1 = GPIO_NUM_7;   // B1
 const gpio_num_t PIN_NUM_DATA2 = GPIO_NUM_6;   // B2
@@ -136,7 +136,7 @@ static void example_lvgl_touch_cb(lv_indev_drv_t *drv, lv_indev_data_t *data) {
 
 static void example_increase_lvgl_tick(void *arg) {
   /* Tell LVGL how many milliseconds has elapsed */
-  lv_tick_inc(LVGL_TICK_PERIOD_MS);
+  //lv_tick_inc(LVGL_TICK_PERIOD_MS); //removed with custom
 }
 
 void app_main(void) {
@@ -171,12 +171,12 @@ void app_main(void) {
            .pclk_hz = LCD_PIXEL_CLOCK_HZ,
            .h_res = LCD_H_RES,
            .v_res = LCD_V_RES,
-           .hsync_pulse_width = 30,
-           .hsync_back_porch = 16,
-           .hsync_front_porch = 210,
-           .vsync_pulse_width = 13,
-           .vsync_back_porch = 10,
-           .vsync_front_porch = 22,
+           .hsync_pulse_width = 48,
+           .hsync_back_porch = 40,
+           .hsync_front_porch = 40,
+           .vsync_pulse_width = 1,
+           .vsync_back_porch = 31,
+           .vsync_front_porch = 13,
            .flags =
                {
                    .hsync_idle_low = (uint32_t)NULL,
@@ -371,4 +371,4 @@ flags to choose i2c source clock here. */
     lv_timer_handler();
   }
 }
-}
+

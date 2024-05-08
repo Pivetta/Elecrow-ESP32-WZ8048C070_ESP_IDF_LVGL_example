@@ -5,4 +5,9 @@
 cmake_minimum_required(VERSION 3.16)
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+
+add_definitions(
+    -include${CMAKE_SOURCE_DIR}/main/lvgl_macros.h
+)
+
 project(main)
