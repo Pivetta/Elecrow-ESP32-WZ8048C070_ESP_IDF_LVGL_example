@@ -170,7 +170,7 @@ void WZ8048C070_Init()
          .bits_per_pixel = (uint8_t)NULL,
          .num_fbs = LCD_NUM_FB,
 #if CONFIG_LCD_USE_BOUNCE_BUFFER
-         .bounce_buffer_size_px = 10 * h_resolution,
+         .bounce_buffer_size_px = 10 * LCD_H_RES,
 #else
          .bounce_buffer_size_px = (size_t)NULL,
 #endif
