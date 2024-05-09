@@ -509,13 +509,13 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
-# Example Configuration
+# LCD Configuration
 #
-# CONFIG_EXAMPLE_DOUBLE_FB is not set
-# CONFIG_EXAMPLE_USE_BOUNCE_BUFFER is not set
-CONFIG_EXAMPLE_AVOID_TEAR_EFFECT_WITH_SEM=y
-CONFIG_EXAMPLE_LCD_TOUCH_ENABLED=y
-# end of Example Configuration
+# CONFIG_LCD_DOUBLE_FB is not set
+# CONFIG_LCD_USE_BOUNCE_BUFFER is not set
+CONFIG_LCD_AVOID_TEAR_EFFECT_WITH_SEM=y
+CONFIG_LCD_TOUCH_ENABLED=y
+# end of LCD Configuration
 
 #
 # Compiler options
